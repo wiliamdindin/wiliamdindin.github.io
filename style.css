@@ -1,0 +1,19 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(-40deg, #406777, #2c7592, #37bbb9);
+  /* background: linear-gradient(-40deg,#5a7fc7, #4f9ebd, #38b8b6); */
+  height: 100dvh;
+  overflow-y: hidden;  
+  color: #f0f0f0;
+}
+
+img {
+  width: 250px;
+}
+
+.divMainHtml {
+  height: 90%;
+  width: 100%;
+}
