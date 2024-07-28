@@ -14,6 +14,12 @@ img {
 }
 
 .divMainHtml {
-  height: 90%;
+  height: 80%;
   width: 100%;
 }
+
+.divNavHtml {
+  height: 10%;
+  width: 100%;
+}
+
