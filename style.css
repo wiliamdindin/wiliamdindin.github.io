@@ -1,51 +1,87 @@
 body {
-  display: flex;
+  background-color: #07566e; 
   margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #326f87;
-  background: linear-gradient(-40deg, #243a42, #1e5368, #207e7c);
-}
-
-.divMainHtml {
-  height: 100dvh;
-  width: 100%;
-}
-
-.divCabecalho {
   display: flex;
-  width: 100%;
-  height: 10%;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%; 
+}
+
+.divHeader {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  justify-content: center;
+  padding: 10px;
+  height: 7%;  
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+}
+
+input {
+  flex-grow: 1;
+  margin: 0 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #5c9;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #4a8;
 }
 
 .divConteudo {
+  background-color: rgb(206, 210, 214);
   width: 100%;
-  height: 80%;
-  color: #f0f0f0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  /* flex-grow: 1; */
+  height: 86%;
+  padding: 20px;
 }
 
-.divRodape {
+
+.divFooter {
+  /* background-color: rgb(50, 187, 50); */
+  width: 100%;
+  height: 5%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 10%;
-  gap: 10px;
+  
+  
   color: #f0f0f0;
 }
 
-img {
-  height: 150px
+
+.musicaItem {
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
+.musicaItem a {
+  text-decoration: none;
+  color: #000000;
+}
 
-
-
+.musicaItem a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+  font-weight: bold;
+}
 
 

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logoJWTAzul.png" type="image/x-icon">
+    <style>
+      /* Estilo geral */
+      body {
+          font-family: Arial, sans-serif;
+      }
+  
+      /* Estilo para os links */
+      .musica-item a {
+          text-decoration: none; /* Remove o sublinhado */
+          color: black; /*Define a cor do texto como preto*/
+      }
+  
+      /* Efeito de zebra na lista de músicas */
+      .musica-item:nth-child(odd) {
+          /* background-color: #f9f9f9; */
+           /* Cor de fundo para as linhas ímpares */
+      }
+  
+      .musica-item:nth-child(even) {
+          background-color: #eaeaea; /* Cor de fundo para as linhas pares */
+      }
+  
+      /* Adiciona um espaçamento e um estilo mais definido */
+      .musica-item {
+          padding: 5px;
+          cursor: pointer;
+          /* border-bottom: 1px solid #ccc; */
+      }
+  
+      .musica-item:hover {
+          /* background-color: #d3d3d3; */
+           /* Muda a cor ao passar o mouse */
+      }
+  
+      /* Estilo para o modal (mantém o original) */
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0, 0, 0, 0.7);
+      }
+  
+      .modal-content {
+          background-color: #fefefe;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          padding: 20px;
+          box-sizing: border-box;
+          overflow-y: auto;
+      }
+  
+      .close {
+          color: #24bfca;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+      }
+  
+      .close:hover,
+      .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+      }
+  
+      .modal img {
+          max-width: 100%;
+          height: auto;
+      }
+  </style>
+  
+</head>
+<body>
+  <div class="divMainHtml">
+
+    <div class="divCabecalho">   
+      <img src="src/images/Cifras JWT.png" alt="Logo" class="logo"> 
+    </div>
+    
+    <div class="divConteudo">
+      <div class="divSearch">
+        <input type="text" id="inputBusca" placeholder="Buscar música">
+        <button id="buscarMusicas">Buscar</button>
+      </div>
+      <div class="divResults" id="results">
+        <!-- Aqui as músicas serão listadas -->
+      </div>
+    </div>
+    
+    <div class="divRodape">
+      Desenvolvido por: Wiliam Dindin           
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="modalBody">
+        <!-- A imagem será exibida aqui -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Importar o arquivo de sumário -->
+  <script type="module">
+    import sumario from './src/funcoes/sumario.js';
+
+    const resultsDiv = document.getElementById('results');
+    const inputBusca = document.getElementById('inputBusca');
+    const modal = document.getElementById('myModal');
+    const closeModal = document.getElementsByClassName('close')[0];
+    const modalBody = document.getElementById('modalBody');
+
+    // Função para listar as músicas filtradas
+    const listarMusicas = (termoBusca = '') => {
+      const musicas = sumario(); // Chama a função sumario() para obter as músicas
+      resultsDiv.innerHTML = ''; // Limpa o conteúdo anterior
+
+      // Filtra as músicas que contêm o termo de busca (case-insensitive)
+      const musicasFiltradas = musicas.filter(musica => 
+        musica.nome.toLowerCase().includes(termoBusca.toLowerCase())
+      );
+
+      // Exibe as músicas filtradas
+      musicasFiltradas.forEach((musica) => {
+        const musicaItem = document.createElement('p');
+        musicaItem.classList.add('musica-item'); // Adiciona a classe musica-item
+        
+        // Cria um link para abrir o modal
+        const link = document.createElement('a');
+        link.href = '#'; // Previne o redirecionamento
+        link.textContent = `${musica.nome} (${musica.categoria})`; // Exibe o nome e a categoria
+        link.addEventListener('click', (event) => {
+          event.preventDefault(); // Previne o comportamento padrão do link
+          abrirModal(musica); // Chama a função para abrir o modal
+        });
+
+        musicaItem.appendChild(link); // Adiciona o link ao item
+        resultsDiv.appendChild(musicaItem); // Adiciona o item à div de resultados
+      });
+
+      // Se não houver músicas, exibir uma mensagem
+      if (musicasFiltradas.length === 0) {
+        resultsDiv.innerHTML = '<p>Nenhuma música encontrada</p>';
+      }
+    };
+
+    // const abrirModal = (musica) => {      
+    //   modalBody.innerHTML = '';    
+
+    //   if (musica.nome === 'Fonte de vida') {
+    //     // Exibe a imagem no modal
+    //   const img = document.createElement('img');
+    //   img.src = `./src/musicas/${musica.caminho}`; // Caminho da imagem JPEG
+    //   img.alt = `${musica.nome}`;
+    //   modalBody.appendChild(img);
+
+    //   modal.style.display = 'block'; // Exibe o modal
+
+    //   } 
+    //   else {
+
+    //     // Exibe o PDF no modal usando um <embed> ou <iframe>
+    //     const pdfEmbed = document.createElement('embed');
+    //     pdfEmbed.src = `./src/musicas/${musica.caminho}`; // Caminho do arquivo PDF
+    //     pdfEmbed.type = 'application/pdf';
+    //     pdfEmbed.width = '100%';
+    //     pdfEmbed.height = '600px'; // Ajuste a altura conforme necessário
+    //     modalBody.appendChild(pdfEmbed);
+  
+    //     // const pdfIframe = document.createElement('iframe');
+    //     // pdfIframe.src = `./src/musicas/${musica.caminho}`;
+    //     // pdfIframe.width = '110%';
+    //     // pdfIframe.height = '600px';
+    //     // modalBody.appendChild(pdfIframe);
+  
+    //     modal.style.display = 'block'; // Exibe o modal
+    //   }
+
+    // };
+
+    const abrirModal = (musica) => {
+      modalBody.innerHTML = '';    
+
+      if (musica.nome === 'Fonte de vida') {
+        // Exibe a imagem no modal
+        const img = document.createElement('img');
+        img.src = `./src/musicas/${musica.caminho}`; // Caminho da imagem JPEG
+        img.alt = `${musica.nome}`;
+        img.style.width = '100%'; // Certifica que a imagem ocupa 100% da largura da tela
+        modalBody.appendChild(img);
+        modal.style.display = 'block'; // Exibe o modal
+      } else {
+        // Exibe o PDF no modal como um <iframe> responsivo
+        const pdfIframe = document.createElement('iframe');
+        pdfIframe.src = `./src/musicas/${musica.caminho}#toolbar=0&navpanes=0&scrollbar=0`; // Remove a barra de ferramentas
+        pdfIframe.style.width = '100%'; // Ajusta a largura ao tamanho da tela
+        pdfIframe.style.height = '90vh'; // Usa 90% da altura da tela para evitar overflow
+        pdfIframe.style.border = 'none'; // Remove a borda
+        modalBody.appendChild(pdfIframe);
+
+        modal.style.display = 'block'; // Exibe o modal
+      }
+    };
+
+
+
+    // Ao carregar a página, lista todas as músicas
+    listarMusicas();
+
+    // Adiciona o evento ao botão de busca para listar com o filtro
+    document.getElementById('buscarMusicas').addEventListener('click', () => {
+      const termoBusca = inputBusca.value; // Obtém o valor do input
+      listarMusicas(termoBusca); // Chama a função com o termo de busca
+    });
+
+    // Fecha o modal ao clicar no "x"
+    closeModal.onclick = () => {
+      modal.style.display = 'none'; // Esconde o modal
+    };
+
+    // Fecha o modal ao clicar fora do conteúdo do modal
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = 'none'; // Esconde o modal
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+body {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100dvh;
+  background-color: #326f87;
+  background-color: rgb(221, 142, 142);
+  /* background: linear-gradient(-40deg, #243a42, #1e5368, #207e7c); */
+}
+
+.divMainHtml {
+  height: 100dvh;
+  width: 100%;
+  
+}
+
+.divCabecalho {
+  display: flex;
+  width: 100%;
+  height: 8%;
+}
+
+.divConteudo {
+  width: 100%;
+  height: 88%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: rebeccapurple; */
+}
+
+.divSearch {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(141, 95, 95);
+}
+
+.divSearch input {
+  width: 60%;
+  padding: 10px;
+  margin-right: 10px;
+  outline: none;
+  font-size: 16px; /* Definir o tamanho da fonte para evitar zoom em dispositivos móveis */
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.divSearch input:focus {
+  border-color: #4CAF50; /* Mudar a cor da borda ao focar */
+}
+
+.divSearch button {
+  padding: 10px 20px;
+}
+
+.divResults {
+  width: 100%;
+  height: 90%;
+  background-color: rgba(241, 238, 238, 0.952);
+  background-color: rgba(16, 83, 50, 0.952);
+}
+
+.divRodape {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4%;
+  color: #f0f0f0;
+}
+
+img {
+  height: 50px;
+}
+
+
+.divSearch button {
+  padding: 10px 20px;
+  background-color: #326f87; 
+  color: white; /* Cor do texto */
+  border: none; /* Remover borda */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Mostrar cursor de mão ao passar */
+  font-size: 16px; /* Aumentar o tamanho da fonte */
+  font-weight: bold; /* Deixar o texto em negrito */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adicionar sombra */
+  gap: 100px;
+}
+
+.divSearch button:hover {
+  background-color: #1a3f4e; /* Mudar a cor ao passar o mouse */
+  transform: scale(1.05); /* Aumentar levemente o botão */
+}
+
+.divSearch button:active {
+  transform: scale(0.98); /* Efeito ao clicar no botão */
+}
+
+
+/* Ajustes no modal para telas menores (dispositivos móveis) */
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 100%; /* Garante que o modal ocupe toda a largura da tela */
+    height: 100%; /* Garante que o modal ocupe toda a altura da tela */
+    padding: 0; /* Remove os espaçamentos internos para maximizar o espaço */
+  }
+
+  iframe {
+    width: 100%; /* Garante que o PDF ocupe toda a largura */
+    height: 90vh; /* Usa 90% da altura da tela */
+  }
+}

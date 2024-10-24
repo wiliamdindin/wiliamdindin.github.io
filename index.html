@@ -3,28 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portifólio</title>
+    <title>JWT Cifras</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logoJWTAzul.png" type="image/x-icon">
+    <link rel="icon" href="images/logoJWTAzul.png" type="image/x-icon">
 </head>
 <body>
-  <div class="divMainHtml">
+    <div class="divHeader">
+        <img src="src/images/Cifras JWT.png" alt="Logo" class="logo"> 
+        <!-- <input type="text" id="inputBusca" placeholder="Buscar música"> -->
+        <!-- <button id="buscarMusicas">Busscar</button> -->
+    </div>
 
-    <div class="divCabecalho">   
-        
-      
+    <div class="divConteudo" id="results">
+        <!-- Aqui as músicas serão listadas -->
     </div>
-    
-    <div class="divConteudo">
-      <h1>Bem-vindo</h1>      
-      <img src="jwtSistemasSemFundo.png" alt="Logo">  
-      <br/><br/><br/><br/><br/><br/><br/>
-      <h2>em construção...</h2>
-      
-    </div>
-    
-    <div class="divRodape">
-      Desenvolvido por: Wiliam Dindin           
-    </div>
-  </div>
+
+    <div class="divFooter">
+        Desenvolvido por: Wiliam Dindin 
+    </div> 
+
+    <script type="module">
+        import sumario from './src/funcoes/sumario.js';
+
+        const musicas = sumario();
+        const resultsDiv = document.getElementById('results');
+        const inputBusca = document.getElementById('inputBusca');
+        const botaoBuscar = document.getElementById('buscarMusicas');
+
+        // Função para exibir músicas filtradas
+        function exibirMusicas(filtro = '') {
+            resultsDiv.innerHTML = ''; // Limpa os resultados anteriores
+            const musicasFiltradas = musicas.filter(musica =>
+                musica.nome.toLowerCase().includes(filtro.toLowerCase())
+            );
+
+            if (musicasFiltradas.length > 0) {
+                musicasFiltradas.forEach(musica => {
+                    const musicaDiv = document.createElement('div');
+                    musicaDiv.classList.add('musicaItem');
+                    musicaDiv.innerHTML = `<a href="src/musicas/${musica.caminho}" target="_blank">${musica.nome}</a>`;
+                    resultsDiv.appendChild(musicaDiv);
+                });
+            } else {
+                resultsDiv.innerHTML = '<p>Nenhuma música encontrada</p>';
+            }
+        }
+
+        // Carregar as músicas ao carregar a página
+        window.onload = () => exibirMusicas();
+
+        // Adicionar evento ao botão de busca
+        botaoBuscar.addEventListener('click', () => {
+            const termoBusca = inputBusca.value;
+            exibirMusicas(termoBusca);
+        });
+    </script>
+</body>
 </html>
