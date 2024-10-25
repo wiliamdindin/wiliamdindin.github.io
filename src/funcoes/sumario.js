@@ -1,8 +1,9 @@
 const sumario = () => {
   const musicas = [    
+    { nome: "Todas do ensaio",                 categoria: "Ensaio",    caminho: "TODAS AS MUSICAS.pdf" },
     { nome: "180 Graus",                       categoria: "Ensaio",    caminho: "180 Graus.pdf" },
     { nome: "Eu sou livre",                    categoria: "Ensaio",    caminho: "Eu sou livre.pdf" },
-    { nome: "Festa do fogo",                   categoria: "AEnsaio",   caminho: "Festa do fogo.pdf" },
+    { nome: "Festa do fogo",                   categoria: "Ensaio",    caminho: "Festa do fogo.pdf" },
     { nome: "Malas prontas",                   categoria: "Ensaio",    caminho: "Malas prontas.pdf" },
     { nome: "O meu lugar é o céu",             categoria: "Ensaio",    caminho: "O meu lugar é o ceu.pdf" },
     { nome: "Chuva de graça",                  categoria: "Ensaio",    caminho: "Chuva de graça.pdf" },
